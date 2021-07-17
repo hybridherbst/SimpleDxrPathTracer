@@ -341,3 +341,7 @@ healthchecksdb
 /Temp
 /Assembly-CSharp.csproj
 /RayTracing.sln
+*.dwlt
+UserSettings
+*.csproj
+*.sln

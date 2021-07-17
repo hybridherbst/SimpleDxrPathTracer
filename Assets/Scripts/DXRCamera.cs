@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 
+[ExecuteAlways]
 public class DXRCamera : MonoBehaviour
 {	
 	public Color SkyColor = Color.blue;
@@ -25,7 +26,7 @@ public class DXRCamera : MonoBehaviour
 
 	private int _frameIndex;
 
-	private void Start()
+	private void OnEnable()
 	{
 		Debug.Log("Raytracing support: " + SystemInfo.supportsRayTracing);
 
@@ -72,7 +73,7 @@ public class DXRCamera : MonoBehaviour
 	private void UpdateParameters()
 	{
 		// update raytracing scene, in case something moved
-		_rtas.Update();
+		_rtas.Build();
 
 		// frustum corners for current camera transform
 		Vector3 bottomLeft = _camera.ViewportToWorldPoint(new Vector3(0, 0, _camera.farClipPlane)).normalized;
@@ -148,7 +149,7 @@ public class DXRCamera : MonoBehaviour
 		//GUILayout.Label("SPP: " + _frameIndex);
 	}
 
-	private void OnDestroy()
+	private void OnDisable()
 	{		
 		// cleanup
 		_rtas.Release();
